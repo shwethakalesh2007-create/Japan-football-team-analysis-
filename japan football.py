@@ -21,7 +21,7 @@ print("\nConnected to MySQL successfully!")
 
 
 # ==========================================
-# 2. PLAYER SEARCH
+# 2. PLAYER SEARCH BY POSITION
 # ==========================================
 
 position = input(
@@ -47,7 +47,33 @@ else:
 
 
 # ==========================================
-# 3. JAPAN WORLD CUP DATA
+# 3. PLAYER SEARCH BY NAME
+# ==========================================
+
+player = input("\nEnter player name: ").strip()
+
+query = f"""
+SELECT player_name, position, primary_club
+FROM players_stat
+WHERE LOWER(player_name) = LOWER('{player}')
+"""
+
+player_result = pd.read_sql(query, db)
+
+if len(player_result) > 0:
+
+    print("\nPLAYER FOUND")
+    print("------------")
+
+    print(player_result)
+
+else:
+
+    print("\nPlayer not found.")
+
+
+# ==========================================
+# 4. JAPAN WORLD CUP DATA
 # ==========================================
 
 world_cup_data = {
@@ -63,7 +89,7 @@ df = pd.DataFrame(world_cup_data)
 
 
 # ==========================================
-# 4. MATCH SEARCH
+# 5. MATCH SEARCH
 # ==========================================
 
 opponent = input("\nEnter opponent team: ").strip()
@@ -93,11 +119,12 @@ if len(match) > 0:
         print("Result:", row["Match_Result"])
 
 else:
+
     print("\nNo match found.")
 
 
 # ==========================================
-# 5. SAMURAI BLUE ANALYSIS
+# 6. SAMURAI BLUE ANALYSIS
 # ==========================================
 
 print("\nSAMURAI BLUE ANALYSIS")
@@ -131,7 +158,7 @@ goal_differential = goal_scored - goal_conceded
 
 
 # ==========================================
-# 6. DISPLAY ANALYSIS
+# 7. DISPLAY ANALYSIS
 # ==========================================
 
 print("\nANALYSIS")
@@ -155,7 +182,7 @@ print(
 
 
 # ==========================================
-# 7. PERFORMANCE TRACKER
+# 8. PERFORMANCE TRACKER
 # ==========================================
 
 print("\nPERFORMANCE TRACKER")
@@ -181,7 +208,7 @@ for index, row in df.iterrows():
 
 
 # ==========================================
-# 8. GRAPH
+# 9. GRAPH
 # ==========================================
 
 print("\nCreating graph...")
@@ -212,7 +239,7 @@ plt.show()
 
 
 # ==========================================
-# 9. CLOSE DATABASE
+# 10. CLOSE DATABASE
 # ==========================================
 
 db.close()
