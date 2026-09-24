@@ -1,4 +1,4 @@
-# Samurai Blue Analysis 🇯🇵⚽
+# Samurai Blue Analysis⚽
 A Python project that analyzes Japan football data.
 
 ## Features
