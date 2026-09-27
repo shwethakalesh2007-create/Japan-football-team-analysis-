@@ -73,7 +73,25 @@ else:
 
 
 # ==========================================
-# 4. JAPAN WORLD CUP DATA
+# 4. PLAYER SEARCH BY CLUB
+# ==========================================
+
+club = input("\nEnter club: ").strip()
+
+result = pd.read_sql(
+    f"SELECT player_name, position FROM players_stat "
+    f"WHERE primary_club LIKE '%{club}%'",
+    db
+)
+
+print("\nPLAYERS FROM CLUB")
+print("-----------------")
+
+print(result if len(result) > 0 else "No players found.")
+
+
+# ==========================================
+# 5. JAPAN WORLD CUP DATA
 # ==========================================
 
 world_cup_data = {
@@ -89,7 +107,7 @@ df = pd.DataFrame(world_cup_data)
 
 
 # ==========================================
-# 5. MATCH SEARCH
+# 6. MATCH SEARCH
 # ==========================================
 
 opponent = input("\nEnter opponent team: ").strip()
@@ -124,7 +142,7 @@ else:
 
 
 # ==========================================
-# 6. SAMURAI BLUE ANALYSIS
+# 7. SAMURAI BLUE ANALYSIS
 # ==========================================
 
 print("\nSAMURAI BLUE ANALYSIS")
@@ -158,7 +176,7 @@ goal_differential = goal_scored - goal_conceded
 
 
 # ==========================================
-# 7. DISPLAY ANALYSIS
+# 8. DISPLAY ANALYSIS
 # ==========================================
 
 print("\nANALYSIS")
@@ -182,7 +200,7 @@ print(
 
 
 # ==========================================
-# 8. PERFORMANCE TRACKER
+# 9. PERFORMANCE TRACKER
 # ==========================================
 
 print("\nPERFORMANCE TRACKER")
@@ -208,11 +226,10 @@ for index, row in df.iterrows():
 
 
 # ==========================================
-# 9. GRAPH
+# 10. GRAPH
 # ==========================================
 
 print("\nCreating graph...")
-
 
 plt.plot(
     df['Opponent'],
@@ -239,7 +256,7 @@ plt.show()
 
 
 # ==========================================
-# 10. CLOSE DATABASE
+# 11. CLOSE DATABASE
 # ==========================================
 
 db.close()
